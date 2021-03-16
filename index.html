@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learn Vuejs</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<h1>Hello Vue</h1>
+
+	<div id="app">
+		  <input type="checkbox" id="message1" value="a" v-model="checked">
+		  <input type="checkbox" id="message2" value="b" v-model="checked">
+		  <input type="checkbox" id="message3" value="c" v-model="checked">
+		  <button type="button" @click="sortCheckbox"> sort </button>
+		  <label>{{ checked }}</label>
+
+	</div>
+
+	<div id="api">
+		<table>
+			<tr v-for="(post, index) in posts">
+				<td>{{ post.id }}</td>
+				<td>{{ post.title }}</td>
+				<td>{{ post.body }}</td>
+			</tr>
+		</table>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<script type="text/javascript">
+		let vue = new Vue({
+			el: '#app',
+			data:{
+				checked: []
+			},
+			methods:{
+				sortCheckbox: function(){
+					this.checked.sort();
+				},
+			},
+			mounted: function() {
+			},
+		});
+
+		let api = new Vue({
+			el: '#api',
+			data:{
+				posts: []
+			},
+			methods:{
+				getPost: function(){
+					let l = this;
+					axios.get('https://jsonplaceholder.typicode.com/posts')
+						.then(function(response){
+							l.posts = response.data;
+						});
+				}
+			},
+			mounted(){
+				this.getPost()
+			}
+		});
+	</script>
+</body>
+</html>
