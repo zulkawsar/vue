@@ -2,9 +2,19 @@ require('./bootstrap');
 
 // window.Vue = require('vue');
 import Vue from 'vue';
-import VueRouter from "vue-router";
 
+// Router
+import VueRouter from "vue-router";
 Vue.use(VueRouter)
+
+// VForm
+import { Form, HasError, AlertError } from 'vform'
+
+window.Form = Form;
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 
 import {routes} from './routes/web';
 
@@ -14,10 +24,10 @@ const routers = new VueRouter({
 	mode: "history"
 });
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 // Vue App
 const app = new Vue({
 	el: '#app',
-	routers
+	router : routers
 });

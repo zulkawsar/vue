@@ -21,5 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('categories', 'Admin\CategoryController');
-Route::resource('posts', 'Admin\PostController');
+Route::get("/categories/{any?}", "Admin\CategoryController@index")->name("category.index")->where('any', '.*');
+
+// Route::resource('categories', 'Admin\CategoryController');
+// Route::resource('posts', 'Admin\PostController');
