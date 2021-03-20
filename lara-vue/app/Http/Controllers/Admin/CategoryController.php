@@ -17,7 +17,9 @@ class CategoryController extends Controller
     {
         $categories = Category::with('posts')->get();
 
-        return $categories;
+        return response()->json([
+            'categories' => $categories
+        ], 200);
     }
 
     /**
@@ -38,7 +40,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required |unique:categories,name'
+        ]);
+        $input = $request->only(['name']);
+
+        $category = Category::create($input);
+
+        if ($category) {
+            return response()->json(['store' => true]);
+        }
+        return response()->json(['store' => false]);
+
     }
 
     /**

@@ -10,7 +10,7 @@
 	                </div>
 
 	                <div class="card-body">
-	                	<form @submit.prevent="login" @keydown="form.onKeydown($event)">
+	                	<form @submit.prevent="store" @keydown="form.onKeydown($event)">
 	                	    <div class="form-group">
 	                	      <label>Category Name</label>
 	                	      <input v-model="form.name" type="text"
@@ -40,11 +40,19 @@
 		},
 
 		methods: {
-			login () {
-		      // Submit the form via a POST request
-		      this.form.post('/login')
-		        .then(({ data }) => { console.log(data) })
+			store () {
+				let thisForm = this;
+		      	// Submit the form via a POST request
+		      	this.form.post('/categories/store')
+		        .then((data) => { 
+			        toastr.success('Data successfully save');
+			        thisForm.form.reset();
+		        }).catch((error) => {
+			        toastr.error(error);
+
+		        })
 		    }
-		}
+		},
+		
     };
 </script>

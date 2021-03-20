@@ -9,14 +9,28 @@ Vue.use(VueRouter)
 
 // VForm
 import { Form, HasError, AlertError } from 'vform'
-
 window.Form = Form;
-
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+// toastr js
+import Toastr from 'toastr'
+window.toastr = Toastr;
+toastr.options.closeButton = true;
+toastr.options.timeOut = 5000;
+toastr.options.extendedTimeOut = 1000;
+toastr.options.progressBar = true;
 
+// import routes
 import {routes} from './routes/web';
+
+// vuex
+import Vuex from 'vuex'
+window.Vuex = Vuex;
+Vue.use(Vuex);
+
+import StoreMethod from './vuex/store';
+const store = new Vuex.Store(StoreMethod);
 
 // routers
 const routers = new VueRouter({
@@ -29,5 +43,6 @@ const routers = new VueRouter({
 // Vue App
 const app = new Vue({
 	el: '#app',
-	router : routers
+	router : routers,
+	store
 });

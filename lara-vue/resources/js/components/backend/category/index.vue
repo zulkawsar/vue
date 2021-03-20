@@ -10,7 +10,26 @@
 	                </div>
 
 	                <div class="card-body">
-	                    I'm an example component.
+                        <table class="table table-bordered">
+                          <thead>                  
+                            <tr>
+                              <th>#</th>
+                              <th>Name</th>
+                              <th>Created Date</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="(category, index) in categories">
+                              <td> {{ index+1 }} </td>
+                              <td>{{ category.name }}</td>
+                              <td>{{ category.created_at }}</td>
+                              <td>
+                              	<button type="button" class="btn btn-primary btn-sm">Edit</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
 	                </div>
 	            </div>
 	        </div>
@@ -22,7 +41,12 @@
     export default {
     	name: "CategoryIndex",
         mounted: function() {
-            console.log('Component mounted.')
+            return this.$store.dispatch("PullCategories");
+        },
+        computed: {
+        	categories(){
+        		return this.$store.getters.ReturnCategories;
+        	}
         }
     };
 </script>
