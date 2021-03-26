@@ -9,7 +9,7 @@ export default {
 	},
 	actions: {
 		PullCategories(data){
-			axios.get('/categories/show').then((response) => {
+			axios.get('/categories/get').then((response) => {
 				data.commit("categories", response.data.categories);
 			}).catch((error) => {
 				data.commit("categories", response.status);

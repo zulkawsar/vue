@@ -15,11 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('posts')->get();
-
-        return response()->json([
-            'categories' => $categories
-        ], 200);
+        return view('admin.components.master');
     }
 
     /**
@@ -27,9 +23,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getCategory()
     {
-        //
+        $categories = Category::with('posts')->get();
+
+        return response()->json([
+            'categories' => $categories
+        ], 200);
     }
 
     /**
@@ -96,6 +96,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

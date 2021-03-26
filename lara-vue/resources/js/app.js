@@ -46,3 +46,9 @@ const app = new Vue({
 	router : routers,
 	store
 });
+
+import moment from 'moment';
+
+Vue.filter('datetime', (a) =>{
+	return moment(a).format('MM/DD/YYYY hh:mm A');
+});
