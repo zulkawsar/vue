@@ -22,10 +22,18 @@
           </router-link>
         </li>
         <li class="nav-item has-treeview">
-          <router-link to="{{'/categories/show'}}" class="nav-link">
+          <router-link to="{{'/categories'}}" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Categories
+            </p>
+          </router-link>
+        </li>
+        <li class="nav-item has-treeview">
+          <router-link to="{{'/posts'}}" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Posts
             </p>
           </router-link>
         </li>

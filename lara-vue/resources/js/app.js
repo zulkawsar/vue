@@ -35,8 +35,10 @@ const store = new Vuex.Store(StoreMethod);
 // routers
 const routers = new VueRouter({
 	routes,
-	mode: "history"
+	// mode: "history"
 });
+
+import { filter } from './filter/filter.js';
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
@@ -45,10 +47,4 @@ const app = new Vue({
 	el: '#app',
 	router : routers,
 	store
-});
-
-import moment from 'moment';
-
-Vue.filter('datetime', (a) =>{
-	return moment(a).format('MM/DD/YYYY hh:mm A');
 });

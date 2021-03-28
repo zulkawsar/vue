@@ -73,7 +73,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return response()->json([
+            'category' => $category
+        ]);
     }
 
     /**
@@ -85,7 +88,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required |unique:categories,name,'.$id
+        ]);
+        $input = $request->only(['name']);
+
+        $category = Category::findOrFail($id);
+        $category = $category->update($input);
+
+        if ($category) {
+            return response()->json(['store' => true]);
+        }
+        return response()->json(['store' => false]);
     }
 
     /**

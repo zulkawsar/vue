@@ -5,14 +5,14 @@
 	        <div class="col-md-12">
 	            <div class="card">
 	                <div class="card-header">
-	                	Create Category
-				        <router-link :to="{ path: '/categories' }" class="btn btn-primary btn-sm float-right"> All Category</router-link>
+	                	Create Post
+				        <router-link :to="{ path: '/posts' }" class="btn btn-primary btn-sm float-right"> All Category</router-link>
 	                </div>
 
 	                <div class="card-body">
 	                	<form @submit.prevent="store" @keydown="form.onKeydown($event)">
 	                	    <div class="form-group">
-	                	      <label>Category Name</label>
+	                	      <label>Post Name</label>
 	                	      <input v-model="form.name" type="text"
 	                	        class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
 	                	      <has-error :form="form" field="name"></has-error>
@@ -29,7 +29,7 @@
 
 <script>
     export default {
-    	name: "CategoryCreate",
+    	name: "PostCreate",
         data: function() {
             return {
               // Create a new form instance
@@ -43,7 +43,7 @@
 			store () {
 				let thisForm = this;
 		      	// Submit the form via a POST request
-		      	this.form.post('/categories/store')
+		      	this.form.post('/posts')
 		        .then((data) => { 
 			        toastr.success('Data successfully save');
 			        thisForm.form.reset();

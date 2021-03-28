@@ -16,7 +16,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with('category','user')->get();
-        return response()->json($posts);
+        return response()->json([
+            'posts' => $posts
+        ],200);
     }
 
     /**
@@ -37,7 +39,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json([
+            'status' => true
+        ]);
     }
 
     /**

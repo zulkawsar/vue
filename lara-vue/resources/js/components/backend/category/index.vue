@@ -25,7 +25,7 @@
                               <td>{{ category.name }}</td>
                               <td>{{ category.created_at | datetime }}</td>
                               <td>
-                              	<button type="button" class="btn btn-primary btn-sm">Edit</button>
+                              	<router-link :to="`/categories/${ category.id }/edit`" class="btn btn-primary btn-sm">Edit</router-link>
                                 <button type="button" class="btn btn-danger btn-sm" @click="deleteCategory(category.id)">Delete</button>
                               </td>
                             </tr>

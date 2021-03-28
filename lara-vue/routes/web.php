@@ -22,9 +22,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get("/categories/get", "Admin\CategoryController@getCategory")->name("category.get");
-Route::get("/categories/{any?}", "Admin\CategoryController@index")->name("category.index")->where('any', '.*');
+// Route::get("/categories/{any?}", "Admin\CategoryController@index")->name("category.index")->where('any', '.*');
+Route::get("/categories/{id}/edit", "Admin\CategoryController@edit")->name("category.edit");
 Route::post("/categories/store", "Admin\CategoryController@store")->name("category.store");
+Route::put("/categories/{id}", "Admin\CategoryController@update")->name("category.update");
 Route::delete("/categories/{id}", "Admin\CategoryController@destroy");
 
 // Route::resource('categories', 'Admin\CategoryController');
-// Route::resource('posts', 'Admin\PostController');
+Route::resource('posts', 'Admin\PostController');

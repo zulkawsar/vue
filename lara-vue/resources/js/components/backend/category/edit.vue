@@ -5,8 +5,9 @@
 	        <div class="col-md-12">
 	            <div class="card">
 	                <div class="card-header">
-	                	Create Category
-				        <router-link :to="{ path: '/categories' }" class="btn btn-primary btn-sm float-right"> All Category</router-link>
+	                	Edit Category
+	                	{{this.$route.params.id}}
+				        <router-link :to="{ path: '/categories' }" class="btn btn-primary btn-sm float-right"> Back </router-link>
 	                </div>
 
 	                <div class="card-body">
@@ -18,7 +19,7 @@
 	                	      <has-error :form="form" field="name"></has-error>
 	                	    </div>
 
-	                	    <button :disabled="form.busy" type="submit" class="btn btn-primary">Create</button>
+	                	    <button :disabled="form.busy" type="submit" class="btn btn-primary">update</button>
 	                	  </form>
 	                </div>
 	            </div>
@@ -29,7 +30,7 @@
 
 <script>
     export default {
-    	name: "CategoryCreate",
+    	name: "CategoryEdit",
         data: function() {
             return {
               // Create a new form instance
@@ -38,19 +39,27 @@
               })
             }
 		},
-
+		mounted(){
+			this.getCatetogy();
+		},
 		methods: {
 			store () {
 				let thisForm = this;
 		      	// Submit the form via a POST request
-		      	this.form.post('/categories/store')
+		      	this.form.put('/categories/'+this.$route.params.id)
 		        .then((data) => { 
-			        toastr.success('Data successfully save');
-			        thisForm.form.reset();
+			       	this.getCatetogy()
+			        toastr.success('Data successfully update');
 		        }).catch((error) => {
 			        toastr.error(error);
-
 		        })
+		    },
+		    getCatetogy(){
+		    	let this_ = this;
+		    	axios.get('/categories/'+this.$route.params.id+'/edit').then(response => {
+		    		// console.log(response);
+		    		this_.form.fill(response.data.category);
+		    	});
 		    }
 		},
 		
